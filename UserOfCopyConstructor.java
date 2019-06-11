@@ -48,7 +48,7 @@ public class UserOfCopyConstructor {
                           + changeMe + System.lineSeparator()
                           + "...and the snapshot is..."
                           + System.lineSeparator()
-                          + snapshot
+						  + snapshot
                           );
     }
 }

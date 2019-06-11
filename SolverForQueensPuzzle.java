@@ -57,21 +57,25 @@ public class SolverForQueensPuzzle {
          that starts -- and ends -- with that board.
      */
     private void recordSolutionsStarted() {
-
-        // Which has been requested, a base case or recursive case?
-            // your code here
-            // action(s) for base case(s)
-            System.out.println( "  for debugging: base case detected for..."
-                              + System.lineSeparator()
-                              + inProgress
-                              );
-
-            // action for recursive cases
-            // your code here
-            System.out.println( "  for debugging: recursive case detected for..."
-                              + System.lineSeparator()
-                              + inProgress
-                              );
+			 if (inProgress.accept()){ //if board is filled and no queens are attacking
+				 nBoardsConsidered ++;
+				 BoardForQueensPuzzle copy = new BoardForQueensPuzzle (inProgress);
+				 solutions.add(copy);
+			 }
+			 else if(!inProgress.lastIsNg()){ //if no queens in the board are attacking
+				 for(int file = 0 ; file < inProgress.ranks(); file ++){ //go through all the files
+					 inProgress.populate(file); // place a queen
+					 if (inProgress.lastIsNg()){ // check to see if board is acceptable
+						 inProgress.depopulate(); // reset board to use again
+						 nBoardsConsidered ++; // add 1 to boards considered
+					 }
+					 else {
+						 recordSolutionsStarted(); // check next rank for solutions
+					 }
+				 }
+			 }
+			 
+			 inProgress.depopulate(); // find other solutions after recursive and base case
     }
 
 
