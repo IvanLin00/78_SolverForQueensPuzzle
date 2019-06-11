@@ -58,15 +58,15 @@ public class SolverForQueensPuzzle {
      */
     private void recordSolutionsStarted() {
 			 if (inProgress.accept()){ //if board is filled and no queens are attacking
-				 nBoardsConsidered ++;
+				 nBoardsConsidered ++; // add 1 to boards considered because it is acceptable
 				 BoardForQueensPuzzle copy = new BoardForQueensPuzzle (inProgress);
-				 solutions.add(copy);
+				 solutions.add(copy); // save a copy in solutions to use inProgress again later
 			 }
 			 else if(!inProgress.lastIsNg()){ //if no queens in the board are attacking
 				 for(int file = 0 ; file < inProgress.ranks(); file ++){ //go through all the files
 					 inProgress.populate(file); // place a queen
 					 if (inProgress.lastIsNg()){ // check to see if board is acceptable
-						 inProgress.depopulate(); // reset board to use again
+						 inProgress.depopulate();
 						 nBoardsConsidered ++; // add 1 to boards considered
 					 }
 					 else {
